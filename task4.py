@@ -18,7 +18,7 @@ def checkArgs(argv):
 
 def getRegion(locale):
     if locale in ('en', 'us', 'US', 'en_US'):
-        locale = 'en',
+        locale = 'en'
         country = 'US'
     elif locale in ('ru', 'Ru'):
         locale = 'ru'
@@ -31,7 +31,7 @@ def getRegion(locale):
     return locale, country
 
 
-def generatingData(num, locale):
+def generatingData(num, locale, country):
     person = Person(locale)
     address = Address(locale)
     buffer = io.StringIO()
@@ -54,10 +54,10 @@ if __name__ == '__main__':
     try:
         num, locale = checkArgs(argv)
         locale, country = getRegion(locale)
-        print(generatingData(num, locale))
+        print(generatingData(num, str(locale), country))
     except AttributeError as e:
         print("AttributeError.  {0}".format(e))
     except ValueError as e:
         print('ValueError.  {0}'.format(e))
-    except Exception:
-        print('Error. Something wrong.')
+    except Exception as e:
+        print('Error. Something wrong.{0}'.format(e))
